@@ -13,9 +13,25 @@
     <h1 class="mb-4 text-primary">{{ message }}</h1>
     <p class="lead">Connect with trusted walkers for your beloved dog!</p>
 
+    <!-- ✅ 登录表单开始 -->
+    <form action="/login" method="POST" class="card p-4 mb-4 shadow-sm bg-white" style="max-width: 400px;">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input name="username" class="form-control" placeholder="e.g. ownerJane" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input name="password" type="password" class="form-control" placeholder="e.g. hashedpassword123" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Log In</button>
+    </form>
+    <!-- ✅ 登录表单结束 -->
+
+    <!-- 保留原有导航按钮 -->
     <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
     <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a>
   </div>
+
 
   <script>
     const { createApp } = Vue;
@@ -23,7 +39,7 @@
       data() {
         return {
           message: 'Welcome to the Dog Walking Service!'
-        };
+        }
       }
     }).mount('#app');
   </script>
