@@ -4,7 +4,7 @@ const path = require('path');
 const session = require('express-session');
 const app = express();
 const mysql = require('mysql2/promise');
-const app = express();
+
 
 const pool = mysql.createPool({
   host: 'localhost',
