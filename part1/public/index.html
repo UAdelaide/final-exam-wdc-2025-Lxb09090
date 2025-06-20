@@ -1,12 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Express</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
+  <meta charset="UTF-8" />
+  <title>Dog of the Day</title>
+  <style>
+    /* Global poor contrast: light gray text on white background */
+    body { background-color: #fff; color: #ddd; font-family: Arial, sans-serif; }
 
+    /* Blinking text animation (cognitive load) */
+    @keyframes blinker { 50% { opacity: 0; } }
+    .blink { animation: blinker 0.8s linear infinite; }
+
+    /* Spinning image animation (distracting motion) */
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    #dogImage { animation: spin 4s linear infinite; }
+  </style>
+</head>
 <body>
-    <h1>Express</h1>
-    <p>Welcome to Express</p>
+
+  <!-- Layout table for non-semantic structure (using table for layout is bad) -->
+  <table width="100%" border="0">
+    <tr>
+      <td align="center">
+        <div id="app">
+          <!-- Not using semantic <h1>; using a styled <div> for the heading -->
+          <div class="blink" style="font-size:20px; font-weight:bold; margin-top: 20px;">
+            🐕 Dog of the Day: {{ dogName }}
+          </div>
+          <!-- Instruction text is very small and low-contrast -->
+          <div style="margin-top: 10px; font-size:10px; color: #aaa;">
+            <em>Click the button to reveal today's dog!</em>
+          </div>
+          <!-- Small, low-contrast button increases kinematic load -->
+          <button @click="getDog" style="margin-top:5px; padding:5px 10px; font-size:8px; color:#ddd; background:#fff; border: 1px solid #ddd;">
+            Show Dog
+          </button>
+          <div style="margin-top:10px;">
+            <!-- Intentionally no alt attribute (image is inaccessible to screen readers) -->
+            <img :src="dogImageUrl" id="dogImage" style="max-width:90%;" />
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Include Vue 3 via CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          dogName: 'Lucky',       // Hard-coded dog name (could be misleading)
+          dogImageUrl: ''         // URL of the fetched dog image
+        };
+      },
+      methods: {
+        getDog() {
+          // Fetch a random dog image from Dog CEO API
+          fetch('https://dog.ceo/api/breeds/image/random')
+            .then(response => response.json())
+            .then(data => {
+              // Update the image URL (display the new dog picture)
+              this.dogImageUrl = data.message;
+            })
+            .catch(err => {
+              console.error('Error fetching dog image:', err);
+            });
+        }
+      }
+    }).mount('#app');
+  </script>
 </body>
 </html>
