@@ -63,6 +63,6 @@ app.post('/login', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-// Export the app instead of li
+// Export the app instead of listening here
 module.exports = app;
 
