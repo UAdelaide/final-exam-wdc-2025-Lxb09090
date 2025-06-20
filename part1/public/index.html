@@ -32,7 +32,6 @@
             Show Dog
           </button>
           <div style="margin-top:10px;">
-            <!-- Intentionally no alt attribute (image is inaccessible to screen readers) -->
             <img v-if="dogImageUrl" :src="dogImageUrl" id="dogImage" style="max-width:90%;" alt="Dog of the day" />
           </div>
         </div>
@@ -40,15 +39,15 @@
     </tr>
   </table>
 
-  <!-- Include Vue 3 via CDN -->
+
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
     const { createApp } = Vue;
     createApp({
       data() {
         return {
-          dogName: 'Lucky',       // Hard-coded dog name (could be misleading)
-          dogImageUrl: ''         // URL of the fetched dog image
+          dogName: 'Lucky',
+          dogImageUrl: ''         
         };
       },
       methods: {
