@@ -95,7 +95,7 @@ router.get('/walkrequests/open', async (req, res) => {
   });
 
   module.exports = router;
-  onst express = require('express');
+const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
