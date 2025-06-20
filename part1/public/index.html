@@ -11,7 +11,6 @@
     @keyframes blinker { 50% { opacity: 0; } }
     .blink { animation: blinker 0.8s linear infinite; }
 
-    /* Spinning image animation (distracting motion) */
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     #dogImage { animation: spin 4s linear infinite; }
   </style>
@@ -47,16 +46,14 @@
       data() {
         return {
           dogName: 'Lucky',
-          dogImageUrl: ''         
+          dogImageUrl: ''
         };
       },
       methods: {
         getDog() {
-          // Fetch a random dog image from Dog CEO API
           fetch('https://dog.ceo/api/breeds/image/random')
             .then(response => response.json())
             .then(data => {
-              // Update the image URL (display the new dog picture)
               this.dogImageUrl = data.message;
             })
             .catch(err => {
