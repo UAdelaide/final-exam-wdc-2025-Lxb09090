@@ -3,6 +3,15 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const app = express();
+const mysql = require('mysql2/promise');
+const app = express();
+
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'dogwalks'
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
