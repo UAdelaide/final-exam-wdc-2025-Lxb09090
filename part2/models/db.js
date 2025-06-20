@@ -8,5 +8,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0
 });
+console.log("✅ CONNECTING TO DB:", pool.config.connectionConfig.database);
+
 
 module.exports = pool;
