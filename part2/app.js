@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'dogwalks'
+  database: ''
 });
 //Middleware
 app.use(express.json());
