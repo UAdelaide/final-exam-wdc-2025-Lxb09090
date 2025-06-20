@@ -1,9 +1,9 @@
-// app.js
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-const app = express();
 const mysql = require('mysql2/promise');
+
+const app = express();
 
 
 const pool = mysql.createPool({
@@ -16,55 +16,53 @@ const pool = mysql.createPool({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(session({
   secret: 'dogwalk-secret-key',
   resave: false,
   saveUninitialized: false
 }));
 
-// Routes
 const userRoutes = require('./routes/userRoutes');
 const walkRoutes = require('./routes/walkRoutes');
-;
 
 app.use('/api/users', userRoutes);
 app.use('/api/walks', walkRoutes);
-app.use('/', loginRoutes);
+
 // Home page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-  });
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
-  // Login logic
-  app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    try {
-      const [rows] = await pool.query(
-        'SELECT * FROM Users WHERE username = ? AND password_hash = ?',
-        [username, password]
-      );
-
-      if (rows.length === 1) {
-        const user = rows[0];
-        req.session.user = {
-          username: user.username,
-          role: user.role
-        };
-        if (user.role === 'owner') {
-          res.redirect('/owner-dashboard.html');
-        } else if (user.role === 'walker') {
-          res.redirect('/walker-dashboard.html');
-        } else {
-          res.status(400).send('Unknown role');
-        }
+// Login logic
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const [rows] = await pool.query(
+      'SELECT * FROM Users WHERE username = ? AND password_hash = ?',
+      [username, password]
+    );
+    if (rows.length === 1) {
+      const user = rows[0];
+      req.session.user = {
+        username: user.username,
+        role: user.role
+      };
+      if (user.role === 'owner') {
+        res.redirect('/owner-dashboard.html');
+      } else if (user.role === 'walker') {
+        res.redirect('/walker-dashboard.html');
       } else {
-        res.status(401).send('Invalid username or password');
+        res.status(400).send('Unknown role');
       }
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Server error');
+    } else {
+      res.status(401).send('Invalid username or password');
     }
-  });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 
 module.exports = app;
 
