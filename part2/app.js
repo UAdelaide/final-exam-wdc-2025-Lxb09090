@@ -17,3 +17,9 @@ app.use('/api/users', userRoutes);
 
 // Export the app instead of listening here
 module.exports = app;
+const app = require('./app');
+const port = 8080;
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
