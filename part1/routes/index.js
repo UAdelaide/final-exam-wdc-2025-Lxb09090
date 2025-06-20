@@ -30,7 +30,7 @@ router.get('/api/dogs', async function (req, res) {
   }
 });
 
-/* GET /api/walkrequests/open */
+
 router.get('/api/walkrequests/open', async function (req, res) {
   try {
     const [rows] = await pool.query(`
