@@ -2,15 +2,14 @@ var express = require('express');
 var router = express.Router();
 const mysql = require('mysql2/promise');
 
-// 创建数据库连接池（根据你自己的密码修改）
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: '', // ← 修改为你的 MySQL 密码
+  password: '',
   database: 'dogwalks'
 });
 
-/* GET /api/dogs */
+
 router.get('/api/dogs', async function (req, res) {
   try {
     const [rows] = await pool.query(`
@@ -24,7 +23,7 @@ router.get('/api/dogs', async function (req, res) {
   }
 });
 
-/* GET /api/walkrequests/open */
+
 router.get('/api/walkrequests/open', async function (req, res) {
   try {
     const [rows] = await pool.query(`
