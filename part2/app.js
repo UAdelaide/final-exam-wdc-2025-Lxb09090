@@ -16,6 +16,7 @@ app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
 // Export the app instead of listening here
+module
 const app = require('./app');
 const port = 8080;
 
