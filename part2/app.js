@@ -95,3 +95,11 @@ router.get('/walkrequests/open', async (req, res) => {
   });
 
   module.exports = router;
+const express = require('express');
+const router = express.Router();
+
+router.get('/', (req, res) => {
+  res.json({ message: 'User route placeholder' });
+});
+
+module.exports = router;
