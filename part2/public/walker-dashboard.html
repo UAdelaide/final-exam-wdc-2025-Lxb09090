@@ -13,7 +13,7 @@
     <div class="mb-4">
       <button class="btn btn-outline-danger" @click="logout">Logout</button>
     </div>
-    
+
     <!-- Alert messages -->
     <div v-if="message" class="alert alert-info">{{ message }}</div>
     <div v-if="error" class="alert alert-danger">{{ error }}</div>
@@ -47,6 +47,11 @@
         const message = ref('');
         const error = ref('');
         const user = 3;
+        async function logout() {
+  await fetch('/api/logout');
+  window.location.href = '/index.html';
+}
+
 
         async function loadWalkRequests() {
           try {
