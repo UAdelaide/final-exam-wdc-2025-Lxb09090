@@ -53,3 +53,45 @@ router.get('/dogs', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch dogs' });
   }
 });
+router.get('/walkrequests/open', async (req, res) => {
+    try {
+      const [rows] = await pool.query(`
+        SELECT
+          WalkRequests.request_id,
+          Dogs.name AS dog_name,
+          WalkRequests.requested_time,
+          WalkRequests.duration_minutes,
+          WalkRequests.location,
+          Users.username AS owner_username
+        FROM WalkRequests
+        JOIN Dogs ON WalkRequests.dog_id = Dogs.dog_id
+        JOIN Users ON Dogs.owner_id = Users.user_id
+        WHERE WalkRequests.status = 'open'
+      `);
+      res.json(rows);
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to fetch open walk requests' });
+    }
+  });
+  router.get('/walkers/summary', async (req, res) => {
+    try {
+      const [rows] = await pool.query(`
+        SELECT
+          u.username AS walker_username,
+          COUNT(r.rating_id) AS total_ratings,
+          ROUND(AVG(r.rating), 1) AS average_rating,
+          COUNT(CASE WHEN w.status = 'completed' THEN 1 END) AS completed_walks
+        FROM Users u
+        LEFT JOIN WalkApplications a ON u.user_id = a.walker_id
+        LEFT JOIN WalkRequests w ON a.request_id = w.request_id
+        LEFT JOIN WalkRatings r ON a.request_id = r.request_id AND r.walker_id = u.user_id
+        WHERE u.role = 'walker'
+        GROUP BY u.username
+      `);
+      res.json(rows);
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to fetch walker summary' });
+    }
+  });
+
+  module.exports = router;
