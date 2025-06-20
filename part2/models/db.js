@@ -8,7 +8,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0
 });
-console.log('✅ CONNECTING TO DB: DogWalkService');
+
 
 
 module.exports = pool;
