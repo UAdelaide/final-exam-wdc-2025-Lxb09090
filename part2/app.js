@@ -22,7 +22,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-
+// Routes
 const userRoutes = require('./routes/userRoutes');
 const walkRoutes = require('./routes/walkRoutes');
 
@@ -63,6 +63,6 @@ app.post('/login', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-
+// Ex
 module.exports = app;
 
