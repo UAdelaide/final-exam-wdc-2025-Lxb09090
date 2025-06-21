@@ -12,6 +12,7 @@ const pool = mysql.createPool({
   password: '',
   database: 'DogWalkService'
 });
+
 //Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -29,12 +30,11 @@ const walkRoutes = require('./routes/walkRoutes');
 app.use('/api/users', userRoutes);
 app.use('/api/walks', walkRoutes);
 
-// Home page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-// Login logic
+
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
