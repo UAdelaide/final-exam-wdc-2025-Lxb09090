@@ -81,16 +81,16 @@ VALUES
  'open'
 ),
 (
- (SELECT dog_id FROM Dogs WHERE name = 'Bella'), 
- '2025-06-10 09:30:00', 
- 45, 
- 'Beachside Ave', 
+ (SELECT dog_id FROM Dogs WHERE name = 'Bella'),
+ '2025-06-10 09:30:00',
+ 45,
+ 'Beachside Ave',
  'accepted'
 ),
 (
-  (SELECT dog_id FROM Dogs WHERE name = 'Rocky'), 
-  '2025-06-11 10:00:00', 
-  60, 
+ (SELECT dog_id FROM Dogs WHERE name = 'Rocky'),
+ '2025-06-11 10:00:00',
+  60,
   'Main Street', 
   'open'
 ),
