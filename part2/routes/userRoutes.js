@@ -65,21 +65,6 @@ router.get('/logout', (req, res) => {
   });
 });
 
-router.get('/dogs/mine', (req, res) => {
-  const ownerId = req.session.user_id;
-  if (!ownerId) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
-  const query = 'SELECT dog_id, name FROM dogs WHERE owner_id = ?';
-  req.db.query(query, [ownerId], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: 'Database error' });
-    }
-    res.json(results);
-  });
-});
-
 
 
 module.exports = router;
