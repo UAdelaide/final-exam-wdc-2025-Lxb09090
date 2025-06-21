@@ -102,9 +102,9 @@ VALUES
  'open'
 ),
 (
- (SELECT dog_id FROM Dogs WHERE name = 'Daisy'), 
-  '2025-06-12 07:45:00', 
-  35, 
-  'Hillside Trail', 
-  'cancelled'
+ (SELECT dog_id FROM Dogs WHERE name = 'Daisy'),
+ '2025-06-12 07:45:00',
+ 35,
+ 'Hillside Trail',
+ 'cancelled'
 );
