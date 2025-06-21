@@ -54,10 +54,10 @@
         }
         async function getCurrentUser() {
           try {
-      const response = await fetch('/api/users/me');
-      if (!response.ok) throw new Error('Failed to fetch user');
-      const user = await response.json();
-      return user.user_id;
+            const response = await fetch('/api/users/me');
+            if (!response.ok) throw new Error('Failed to fetch user');
+            const user = await response.json();
+            return user.user_id;
     } catch (error) {
       console.error('Error fetching current user:', error);
       return null;
