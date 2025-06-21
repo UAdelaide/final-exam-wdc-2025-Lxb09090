@@ -63,7 +63,7 @@ INSERT INTO Users (username, email, password_hash, role) VALUES
 
 
 INSERT INTO Dogs (owner_id, name, size)
-VALUES 
+VALUES
 ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Max', 'medium'),
 ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Bella', 'small'),
 ((SELECT user_id FROM Users WHERE username = 'daviddog'), 'Rocky', 'large'),
@@ -96,15 +96,14 @@ VALUES
 ),
 (
  (SELECT dog_id FROM Dogs WHERE name = 'Luna'),
-  '2025-06-11 14:00:00',
-  40,
-  'Riverside Park',
-  'open'
+ '2025-06-11 14:00:00',
+ 40,
+ 'Riverside Park',
+ 'open'
 ),
 (
-  (SELECT dog_id FROM Dogs WHERE name = 'Daisy'), 
+  (SELECT dog_id FROM Dogs WHERE name = 'Daisy'),
   '2025-06-12 07:45:00', 
-  35, 
   'Hillside Trail', 
   'cancelled'
 );
