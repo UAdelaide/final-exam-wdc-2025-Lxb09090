@@ -62,6 +62,11 @@ INSERT INTO Users (username, email, password_hash, role) VALUES
 INSERT INTO Dogs (name, size, owner_id) VALUES
 ('Max', 'medium', (SELECT user_id FROM Users WHERE username='ownerJane')),
 ('Bella', 'small', (SELECT user_id FROM Users WHERE username='ownerBob'));
+('Buddy', 'medium', (SELECT user_id FROM Users WHERE username='ownerJane')),
+('Lucy', 'small',  (SELECT user_id FROM Users WHERE username='ownerJane')),
+('Rocky', 'large', (SELECT user_id FROM Users WHERE username='ownerBob')),
+('Daisy', 'medium',(SELECT user_id FROM Users WHERE username='ownerBob')),
+('Milo', 'small',  (SELECT user_id FROM Users WHERE username='ownerBob'));
 
 INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status) VALUES
 ((SELECT dog_id FROM Dogs WHERE name='Max'), '2025-06-10 08:00:00', 30, 'Parklands', 'open'),
