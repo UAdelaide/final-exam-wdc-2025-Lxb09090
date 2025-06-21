@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// POST an application to walk a dog (from walker)
+
 router.post('/:id/apply', async (req, res) => {
   const requestId = req.params.id;
   const { walker_id } = req.body;
@@ -56,6 +56,36 @@ router.post('/:id/apply', async (req, res) => {
   } catch (error) {
     console.error('SQL Error:', error);
     res.status(500).json({ error: 'Failed to apply for walk' });
+  }
+});
+router.get('/my-dogs', async (req, res) => {
+  if (!req.session.user || req.session.user.role !== 'owner') {
+    return res.status(401).json({ error: 'Not authorized' });
+  }
+
+  const ownerName = req.session.user.username;
+
+  try {
+    const [ownerRows] = await db.query(
+      'SELECT user_id FROM Users WHERE username = ? AND role = "owner"',
+      [ownerName]
+    );
+
+    if (ownerRows.length === 0) {
+      return res.status(404).json({ error: 'Owner not found' });
+    }
+
+    const ownerId = ownerRows[0].user_id;
+
+    const [dogs] = await db.query(
+      'SELECT dog_id, name FROM Dogs WHERE owner_id = ?',
+      [ownerId]
+    );
+
+    res.json(dogs);
+  } catch (err) {
+    console.error('SQL Error:', err);
+    res.status(500).json({ error: 'Failed to load dogs' });
   }
 });
 
