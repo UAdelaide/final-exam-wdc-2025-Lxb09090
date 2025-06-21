@@ -90,11 +90,12 @@
             await loadWalkRequests();
           } catch (err) {
             error.value = err.message;
-            message.value = ''; 
+            message.value = '';
           }
         }
 
         onMounted(() => {
+          getCurrentUser();
           loadWalkRequests();
         });
 
