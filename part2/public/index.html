@@ -26,24 +26,23 @@
       <button type="submit" class="btn btn-primary w-100">Log In</button>
     </form>
 
-    <div id="doglist" class="container mt-4">
-      <h3 class="mb-3">Available Dogs</h3>
-      <div class="row">
-        <div class="col-md-4" v-for="dog in dogs" :key="dog.dog_id">
-          <div class="card mb-3">
-            <img :src="dog.photo" class="card-img-top" alt="Dog Image">
-            <div class="card-body">
-              <h5 class="card-title">{{ dog.name }}</h5>
-              <p class="card-text">Size: {{ dog.size }}</p>
-              <p class="card-text">Owner ID: {{ dog.owner_id }}</p>
-            </div>
+    <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
+    <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a>
+  </div>
+  <div id="doglist" class="container mt-4">
+    <h3 class="mb-3">Available Dogs</h3>
+    <div class="row">
+      <div class="col-md-4" v-for="dog in dogs" :key="dog.dog_id">
+        <div class="card mb-3">
+          <img :src="dog.photo" class="card-img-top" alt="Dog Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ dog.name }}</h5>
+            <p class="card-text">Size: {{ dog.size }}</p>
+            <p class="card-text">Owner ID: {{ dog.owner_id }}</p>
           </div>
         </div>
       </div>
     </div>
-
-    <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
-    <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a>
   </div>
 
 
