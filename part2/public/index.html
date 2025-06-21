@@ -64,28 +64,7 @@ createDogApp({
       dogs: []
     };
   },
-  async mounted() {
-    try {
-      const dogRes = await fetch('/api/dogs');
-      const dogList = await dogRes.json();
 
-      const dogsWithPhotos = await Promise.all(
-        dogList.map(async (dog) => {
-          const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
-          const imgData = await imgRes.json();
-          return {
-            ...dog,
-            photo: imgData.message
-          };
-        })
-      );
-
-      this.dogs = dogsWithPhotos;
-    } catch (err) {
-      console.error('Failed to load dog list:', err);
-    }
-  }
-}).mount('#doglist');
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
