@@ -90,15 +90,15 @@ VALUES
 (
  (SELECT dog_id FROM Dogs WHERE name = 'Rocky'),
  '2025-06-11 10:00:00',
-  60,
-  'Main Street', 
-  'open'
+ 60,
+ 'Main Street',
+ 'open'
 ),
 (
-  (SELECT dog_id FROM Dogs WHERE name = 'Luna'), 
-  '2025-06-11 14:00:00', 
-  40, 
-  'Riverside Park', 
+ (SELECT dog_id FROM Dogs WHERE name = 'Luna'),
+  '2025-06-11 14:00:00',
+  40,
+  'Riverside Park',
   'open'
 ),
 (
